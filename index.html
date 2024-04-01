@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getComputerChoice() {
+            let max = 3;
+            let min = 1;
+            let numChoice = Math.floor(Math.random() * (max - min + 1) + min);
+            if (numChoice === 1) {
+                return 'rock';
+            }
+            else if (numChoice === 2) {
+                return 'paper';
+            }
+            else {
+                return 'scissors';
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            
+            if(playerSelection === 'rock' && computerSelection === 'scissors' ||
+                playerSelection === 'paper' && computerSelection === 'rock' ||
+                playerSelection === 'scissors' && computerSelection === 'paper') {
+                    return `You win! ${playerSelection.charAt(0).toUpperCase()+ playerSelection.slice(1)} beats ${computerSelection}`;
+                }
+            else if ( playerSelection === computerSelection) {
+                return "It's a tie!"
+            }
+            else {
+                return `You lose! ${computerSelection.charAt(0).toUpperCase()+ playerSelection.slice(1)} beats ${playerSelection}`;
+            }
+ 
+        }
+
+        function playGame() {
+            let won = 0;
+            let lost = 0;
+            let computerSelection;
+            let result;
+            for(let i = 1; i <= 5; i++) {
+                computerSelection = getComputerChoice();
+                playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+                // we need the second word of result which is win or loose
+                result = playRound(playerSelection, computerSelection).split(' ')[1];
+           
+                if(result === 'win!') {
+                    won++;
+                }
+                else if(result === 'lose!') {
+                    lost++;
+                }
+            }
+            
+            if (won > lost) {
+                return `You won with ${won} wins`;
+            }
+            else if (won === lost) {
+                return `It's a tie`;
+            }
+            else {
+                return `You lost with ${won} wins`;
+            }
+        }
+
+        
+        console.log(playGame());
+    </script>
+</body>
+</html>
